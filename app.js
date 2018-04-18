@@ -1,4 +1,5 @@
 const express = require('express');
+const methodOverride = require('method-override')
 const exphbs  = require('express-handlebars');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -25,8 +26,12 @@ app.engine('handlebars', exphbs({
 app.set('view engine', 'handlebars');
 
 // Body parser middleware
-app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+// Method Override middleware
+app.use(methodOverride('_method'));
+
 
 // Index Route
 app.get('/', (req, res) => {
@@ -58,7 +63,19 @@ app.get('/ideas/add', (req, res) => {
   res.render('ideas/add');
 });
 
-// Process Form
+// Edit idea form
+app.get('/ideas/edit/:id', (req, res) => {
+  Idea.findOne({
+    _id: req.params.id
+  })
+  .then(idea => {
+    res.render('ideas/edit', {
+      idea
+    });
+  })
+});
+
+// Process Add Form
 app.post('/ideas', (req, res) => {
   let errors = [];
   console.log(req.body)
@@ -87,6 +104,33 @@ app.post('/ideas', (req, res) => {
         res.redirect('/ideas');
       })
   }
+});
+
+// Edit Form process
+app.put('/ideas/:id', (req, res) => {
+  Idea.findOne({
+    _id: req.params.id
+  })
+  .then(idea => {
+    // New vlaue
+    idea.title = req.body.title;
+    idea.details = req.body.details;
+
+    idea.save()
+      .then(idea => {
+        res.redirect('/ideas')
+      })
+  })
+});
+
+// Delete Idea
+app.delete('/ideas/:id', (req, res) => {
+  Idea.remove({
+    _id: req.params.id
+  })
+  .then(() => {
+    res.redirect('/ideas')
+  });
 });
 
 const port = 5000;
