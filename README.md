@@ -23,11 +23,11 @@ Live link:
 - mLab
 - Heroku
 
-<img src="/public/img/app.png1">
+<img src="/public/img/app1.png">
 <br>
-<img src="/public/img/app.png2">
+<img src="/public/img/app2.png">
 <br>
-<img src="/public/img/app.png3">
+<img src="/public/img/app3.png">
 <br>
-<img src="/public/img/app.png4">
+<img src="/public/img/app4.png">
 <br>
