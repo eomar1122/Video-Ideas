@@ -4,10 +4,8 @@ Full Stack web application to add ideas for Youtube videos. You can sign up and 
 
 Live link: 
 
-
-
-
-
+<img src="/public/img/app.png">
+<br>
 
 ## Technologies
 
@@ -24,3 +22,12 @@ Live link:
 - Bootstrap
 - mLab
 - Heroku
+
+<img src="/public/img/app.png1">
+<br>
+<img src="/public/img/app.png2">
+<br>
+<img src="/public/img/app.png3">
+<br>
+<img src="/public/img/app.png4">
+<br>
