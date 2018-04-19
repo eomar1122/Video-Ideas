@@ -2,7 +2,7 @@
 
 Full Stack web application to add ideas for Youtube videos. You can sign up and add, edit, or delete an idea that has been posted in your account. For authentication, we use local - Passport authentication.
 
-Live link: <a href="https://vidoe-ideas.herokuapp.com/" target="_blank">
+Live link: <a href="https://vidoe-ideas.herokuapp.com/" target="_blank">click here</a>
 
 <img src="/public/img/app.png">
 <br>
