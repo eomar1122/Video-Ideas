@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 // Load helpers
-const { ensureAuthenticated } = require('../helpers/auth');
+const { ensureAuthenticated } = require("../helpers/auth");
 
 // Load idea model
 require("../models/idea");
@@ -23,7 +23,7 @@ module.exports = app => {
 
   // Idea index page
   app.get("/ideas", ensureAuthenticated, (req, res) => {
-    Idea.find({user: req.user.id})
+    Idea.find({ user: req.user.id })
       .sort({ date: "desc" })
       .then(ideas => {
         res.render("ideas/index", {
@@ -42,9 +42,14 @@ module.exports = app => {
     Idea.findOne({
       _id: req.params.id
     }).then(idea => {
-      res.render("ideas/edit", {
-        idea
-      });
+      if (idea.user != req.user.id) {
+        req.flash("error_msg", "Not Authorized");
+        res.redirect("/ideas");
+      } else {
+        res.render("ideas/edit", {
+          idea
+        });
+      }
     });
   });
 
@@ -73,7 +78,7 @@ module.exports = app => {
       };
 
       new Idea(newUser).save().then(idea => {
-        req.flash('success_msg', 'Video idea added');
+        req.flash("success_msg", "Video idea added");
         res.redirect("/ideas");
       });
     }
@@ -89,7 +94,7 @@ module.exports = app => {
       idea.details = req.body.details;
 
       idea.save().then(idea => {
-        req.flash('success_msg', 'Video idea updated');
+        req.flash("success_msg", "Video idea updated");
         res.redirect("/ideas");
       });
     });
@@ -100,7 +105,7 @@ module.exports = app => {
     Idea.remove({
       _id: req.params.id
     }).then(() => {
-      req.flash('success_msg', 'Video idea deleted');
+      req.flash("success_msg", "Video idea deleted");
       res.redirect("/ideas");
     });
   });

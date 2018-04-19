@@ -30,7 +30,7 @@ module.exports = app => {
   app.post('/users/register', (req, res) => {
     let errors = [];
 
-    if (req.body.password !== req.body.password2) {
+    if (req.body.password != req.body.password2) {
       errors.push({ test: "Passwords do not match" });
     }
 
